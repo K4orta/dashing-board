@@ -2,14 +2,15 @@
 <html>
 <head>
 	<title>Modest-board</title>
+	<link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
 	<script type="text/javascript" src="vendor/angular/angular.min.js"></script>
 	<script type="text/javascript" src="vendor/moment/min/moment.min.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body ng-app="dashboard">
-<h1>Yep</h1>
 <div ng-controller="DashCtrl">
-	<ul>
+	<ul class="list-unstyled">
 		<li ng-repeat="day in weather.daily.data">
 			{{day.icon}}
 			{{day.time | moment}}

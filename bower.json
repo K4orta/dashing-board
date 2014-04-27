@@ -4,6 +4,7 @@
   "dependencies": {
   	"jquery": "*",
   	"angular": "*",
-  	"moment": "*"
+  	"moment": "*",
+  	"bootstrap": "*"
   }
 }
