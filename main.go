@@ -10,7 +10,7 @@ import (
 
 func main() {
 	m := martini.Classic()
-	weatherApiKey := os.Getenv("WEATHER_API_KEY")
+	weatherApiKey := os.Getenv("FORECAST_API_KEY")
 
 	m.Get("/", func() string {
 		return "Hello World"

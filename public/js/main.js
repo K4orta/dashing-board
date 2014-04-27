@@ -15,3 +15,22 @@ app.filter('moment', function() {
 		return moment(input * 1000).format('llll');
 	}
 });
+
+app.filter('weatherIcon', function() {
+	var weatherIcons = {
+		'partly-cloudy-day': 'day-cloudy',
+		'partly-cloudy-night': 'night-cloudy',
+		'clear-night': 'night-clear',
+		'clear-day': 'day-sunny',
+		'fog': 'fog',
+		'rain': 'rain',
+		'cloudy': 'cloudy',
+		'wind': 'cloudy-gusts'
+	}
+	return function(input) {
+		if(weatherIcons[input]){
+			return 'wi-' + weatherIcons[input];
+		} 
+		return input;
+	}
+});

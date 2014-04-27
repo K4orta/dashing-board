@@ -38,7 +38,6 @@ func DeparturesByStopCode(code string) *Query {
 	apiKey := os.Getenv("TRANSIT_API_KEY")
 	apiUrl := "http://services.my511.org/Transit2.0/GetNextDeparturesByStopCode.aspx?token=" + apiKey + "&stopcode="
 	resp, err := http.Get(apiUrl + code)
-	fmt.Println(apiUrl)
 	defer resp.Body.Close()
 	if err != nil {
 		fmt.Println("Can't Reach Transit API")
