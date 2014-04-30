@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/go-martini/martini"
 	"github.com/k4orta/dashing-board/lunch"
+	"github.com/k4orta/dashing-board/news"
 	"github.com/k4orta/dashing-board/transit"
 	"io/ioutil"
 	"net/http"
@@ -31,6 +32,10 @@ func main() {
 
 	m.Get("/lunch/:marketCode", func(params martini.Params) string {
 		return lunch.GetTrucks(params["marketCode"])
+	})
+
+	m.Get("/news", func() string {
+		return news.YCombinator()
 	})
 
 	m.Use(martini.Static("public"))

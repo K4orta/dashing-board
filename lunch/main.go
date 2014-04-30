@@ -11,7 +11,7 @@ func GetTrucks(marketCode string) string {
 	resp, err := http.Get(apiUrl + marketCode)
 	defer resp.Body.Close()
 	if err != nil {
-		fmt.Println("Can't Reach Off THe Grid API")
+		fmt.Println("Can't Reach Off The Grid URL")
 		return ""
 	}
 	b, _ := ioutil.ReadAll(resp.Body)
