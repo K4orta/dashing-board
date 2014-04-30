@@ -1,9 +1,13 @@
 var app = angular.module('dashboard', []);
 
 var sortByTime = function(input) {
-	return _.sortBy(input, function(route) {
-	 	console.log(input);
-	 	return 1;
+	if (input[0].directions) {
+		return _.sortBy(input, function(route) {
+			return route.directions[0].departures[0];
+		});
+	}
+	return _.sortBy(_.filter(input, function(route) { return route.departures; }), function(route) {
+		return route.departures[0];
 	});
 };
 
@@ -24,18 +28,18 @@ var DashCtrl = function($scope, $http, $interval) {
 		$scope.weather = resp.data;
 	});
 	$http.get('/transit/16997').then(function(resp) {
-		$scope.transit = resp.data;
+		$scope.transit = sortByTime(resp.data);
 	});
 	$http.get('/transit/11').then(function(resp) {
-		$scope.bart = resp.data;
+		$scope.bart = sortByTime(resp.data);
 	});
 
 	$interval(function() {
 		$http.get('/transit/16997').then(function(resp) {
-			$scope.transit = resp.data;
+			$scope.transit = sortByTime(resp.data);
 		});
 		$http.get('/transit/11').then(function(resp) {
-			$scope.bart = resp.data;
+			$scope.bart = sortByTime(resp.data);
 		});
 	}, 60000);
 

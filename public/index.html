@@ -29,15 +29,15 @@
 				</div>
 				
 				<ul class="list-unstyled forecast">
-					<li ng-repeat="day in weather.daily.data" ng-if="$index > 0">
-						<div class="forecast__icon">
-							<i ng-class="day.icon | weatherIcon"></i>
-						</div>
-						<div class="forecast__day">
+					<li class="forecast__item" ng-repeat="day in weather.daily.data" ng-class="{'current-day': $index===0}">
+						<div class="forecast__day forecast-col">
 							{{day.time | moment}}
 						</div>
-						<div class="forecast__temp">
-							{{day.temperatureMax | trunk}}
+						<div class="forecast__icon forecast-col">
+							<i ng-class="day.icon | weatherIcon"></i>
+						</div>
+						<div class="forecast__temp forecast-col">
+							{{day.temperatureMax | trunk}} / {{day.temperatureMin | trunk}}
 							<i class="wi-fahrenheit"></i>
 						</div>
 					</li>
@@ -46,9 +46,9 @@
 			<div class="col-md-5">
 				<div>Muni</div>
 				<ul class="list-unstyled">
-					<li ng-repeat="route in transit.agencyList">
+					<li ng-repeat="route in transit">
 						{{route.name}}, 
-						<span ng-repeat="time in route.directions[0].Departures">
+						<span ng-repeat="time in route.directions[0].departures" ng-class="{'first-time': $index===0}">
 							{{time}},
 						</span>
 					</li>
@@ -57,9 +57,9 @@
 			<div class="col-md-4">
 				<div>Bart</div>
 				<ul class="list-unstyled">
-					<li ng-repeat="route in bart.agencyList" ng-if="route.Departures">
+					<li ng-repeat="route in bart" ng-if="route.departures">
 						{{route.name}}
-						<span ng-repeat="time in route.Departures">
+						<span ng-repeat="time in route.departures" ng-class="{'first-time': $index===0}">
 							{{time}},
 						</span>
 					</li>

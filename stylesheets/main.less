@@ -2,7 +2,16 @@
 	font-family: "Clear Sans";
 	src: url("/fonts/ClearSans-Light.eot");
 	src: url("/fonts/ClearSans-Light.eot") format("embedded-opentype"), url("/fonts/ClearSans-Light.woff") format("woff"), url("/fonts/ClearSans-Light.ttf") format("truetype"), url("/fonts/ClearSans-Light.svg") format("svg");
-}	
+}
+
+@font-face {
+	font-family: "Clear Sans";
+	src: url("/fonts/ClearSans-Bold.eot");
+	src: url("/fonts/ClearSans-Bold.eot") format("embedded-opentype"), url("/fonts/ClearSans-Bold.woff") format("woff"), url("/fonts/ClearSans-Bold.ttf") format("truetype"), url("/fonts/ClearSans-Bold.svg") format("svg");
+	font-weight: 900;
+}
+
+
 
 html {
 	font-size: 24px;
@@ -17,11 +26,20 @@ body {
 	font-size: 24px;
 	height: 100%;
 	min-height: 100%;
-	;
 }
 
 .clock {
 	font-size: 2rem;
+	text-align: right;
+}
+
+.date {
+	text-align: right;
+	letter-spacing: 2px;
+}
+
+.current-weather {
+	margin: 1rem 0;
 }
 
 .current-weather__temp {
@@ -30,4 +48,32 @@ body {
 
 .current-weather__summary {
 	display: block;
+}
+
+.forecast {
+	display: table;
+	width: 100%;
+}
+
+.forecast__icon {
+	text-align: center;
+	margin-right: 1rem;
+}
+
+.forecast__item {
+	display: table-row;
+
+	&.current-day {
+		.forecast__day {
+			font-weight: 900;
+		}
+	}
+}
+
+.forecast-col {
+	display: table-cell;
+}
+
+.first-time {
+	font-weight: 900;
 }

@@ -25,13 +25,13 @@ type Route struct {
 	Code       string      `xml:"Code,attr" json:"code"`
 	Directions []Direction `xml:"RouteDirectionList>RouteDirection" json:"directions,omitempty"`
 	// For BART stops
-	Departures []int16 `xml:"StopList>Stop>DepartureTimeList>DepartureTime" json:"Departures,omitempty"`
+	Departures []int16 `xml:"StopList>Stop>DepartureTimeList>DepartureTime" json:"departures,omitempty"`
 }
 
 type Direction struct {
 	Name       string  `xml:"Name,attr"`
 	Code       string  `xml:"Code,attr"`
-	Departures []int16 `xml:"StopList>Stop>DepartureTimeList>DepartureTime"`
+	Departures []int16 `xml:"StopList>Stop>DepartureTimeList>DepartureTime" json:"departures"`
 }
 
 func DeparturesByStopCode(code string) *Query {
@@ -50,6 +50,6 @@ func DeparturesByStopCode(code string) *Query {
 }
 
 func Export(q Query) string {
-	out, _ := json.Marshal(q)
+	out, _ := json.Marshal(q.AgencyList)
 	return string(out)
 }
