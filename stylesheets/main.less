@@ -11,8 +11,6 @@
 	font-weight: 900;
 }
 
-
-
 html {
 	font-size: 24px;
 	min-height: 100%;
@@ -76,4 +74,39 @@ body {
 
 .first-time {
 	font-weight: 900;
+}
+
+.route-icon-muni {
+	height: 1rem;
+	margin-top: -2px;
+}
+
+.bart-swatch(@route-color) {
+	position: relative;
+	padding-left: 1rem;
+	&:before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: .35rem;
+		width: .75rem;
+		height: .75rem;
+		background-color: @route-color;
+	}
+}
+
+.bart-762 {
+	.bart-swatch(#ff001a);
+}
+
+.bart-908 {
+	.bart-swatch(#ffe700);
+}
+
+.bart-920 {
+	.bart-swatch(#00b2f1);
+}
+
+.bart-917 {
+	.bart-swatch(#ff9f00);
 }

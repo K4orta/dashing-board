@@ -45,10 +45,22 @@
 			</div>
 			<div class="col-md-5">
 				<div>Muni</div>
+				<div>Outbound</div>
 				<ul class="list-unstyled">
 					<li ng-repeat="route in transit">
-						{{route.name}}, 
+						<img ng-src="{{routeIcon(route)}}" class="route-icon-muni">
+						{{chopMuniName(route.name)}},
 						<span ng-repeat="time in route.directions[0].departures" ng-class="{'first-time': $index===0}">
+							{{time}},
+						</span>
+					</li>
+				</ul>
+				<div>Inbound</div>
+				<ul class="list-unstyled">
+					<li ng-repeat="route in transit">
+						<img ng-src="{{routeIcon(route)}}" class="route-icon-muni">
+						{{chopMuniName(route.name)}},
+						<span ng-repeat="time in route.directions[1].departures" ng-class="{'first-time': $index===0}">
 							{{time}},
 						</span>
 					</li>
@@ -57,7 +69,7 @@
 			<div class="col-md-4">
 				<div>Bart</div>
 				<ul class="list-unstyled">
-					<li ng-repeat="route in bart" ng-if="route.departures">
+					<li ng-repeat="route in bart" ng-if="route.departures" ng-class="bartRouteClass(route)">
 						{{route.name}}
 						<span ng-repeat="time in route.departures" ng-class="{'first-time': $index===0}">
 							{{time}},

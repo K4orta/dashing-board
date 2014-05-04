@@ -12,7 +12,6 @@ var sortByTime = function(input) {
 };
 
 var DashCtrl = function($scope, $http, $interval) {
-	$scope.modules = ["a", "b", "c"];
 	$scope.weather = {};
 
 	//Setup and update the clock
@@ -27,7 +26,7 @@ var DashCtrl = function($scope, $http, $interval) {
 	$http.get('/weather').then(function(resp) {
 		$scope.weather = resp.data;
 	});
-	$http.get('/transit/16997').then(function(resp) {
+	$http.get('/transit/muni').then(function(resp) {
 		$scope.transit = sortByTime(resp.data);
 	});
 	$http.get('/transit/11').then(function(resp) {
@@ -35,7 +34,7 @@ var DashCtrl = function($scope, $http, $interval) {
 	});
 
 	$interval(function() {
-		$http.get('/transit/16997').then(function(resp) {
+		$http.get('/transit/muni').then(function(resp) {
 			$scope.transit = sortByTime(resp.data);
 		});
 		$http.get('/transit/11').then(function(resp) {
@@ -48,6 +47,19 @@ var DashCtrl = function($scope, $http, $interval) {
 			$scope.weather = resp.data;
 		});
 	}, 300000);
+
+	$scope.routeIcon = function(route) {
+		return "/images/muni/" + route.code + ".svg";
+	};
+
+	$scope.bartRouteClass = function(route) {
+		return "bart-" + route.code;
+	};
+
+	$scope.chopMuniName = function(name) {
+		// console.log()
+		return _.last(name.split("-"));
+	};
 };
 
 app.filter('moment', function() {

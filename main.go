@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/go-martini/martini"
 	"github.com/k4orta/dashing-board/lunch"
 	"github.com/k4orta/dashing-board/news"
@@ -25,10 +26,22 @@ func main() {
 		return string(content)
 	})
 
-	m.Get("/transit/:stopCode", func(params martini.Params) string {
-		ret := transit.DeparturesByStopCode(params["stopCode"])
-		return transit.Export(*ret)
+	m.Get("/transit/muni", func(params martini.Params) string {
+		ret := transit.DeparturesByStopCode("16997", "15727")
+		// return string(ret)
+		return transit.Export(ret)
 	})
+
+	m.Get("/transit/bart", func(params martini.Params) string {
+		ret := transit.DeparturesByStopCode("11", "12")
+		// return string(ret)
+		return transit.Export(ret)
+	})
+
+	// m.Get("/transit/:stopCode", func(params martini.Params) string {
+	// 	ret := transit.DeparturesByStopCode(params["stopCode"])
+	// 	return transit.Export(transit.MergeDirections(ret))
+	// })
 
 	m.Get("/lunch/:marketCode", func(params martini.Params) string {
 		return lunch.GetTrucks(params["marketCode"])
@@ -40,4 +53,5 @@ func main() {
 
 	m.Use(martini.Static("public"))
 	m.Run()
+	fmt.Println("Started Dashboard Server")
 }
