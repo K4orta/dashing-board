@@ -95,18 +95,32 @@ body {
 	}
 }
 
-.bart-762 {
-	.bart-swatch(#ff001a);
-}
+.bart-route{
+	// Richmond
+	&[code="762"] {
+		.bart-swatch(#ff001a);
+	}
+	
+	// Bay Point
+	&[code="908"] {
+		.bart-swatch(#ffe700);
+	}
 
-.bart-908 {
-	.bart-swatch(#ffe700);
-}
+	&[code="920"] {
+		.bart-swatch(#00b2f1);
+	}
 
-.bart-920 {
-	.bart-swatch(#00b2f1);
-}
+	&[code="917"] {
+		.bart-swatch(#ff9f00);
+	}
+	
+	// SFO
+	&[code="831"] {
+		.bart-swatch(#ff001a);
+	}
 
-.bart-917 {
-	.bart-swatch(#ff9f00);
+	// Daily City
+	&[code="747"] {
+		.bart-swatch(#ffe700);
+	}
 }

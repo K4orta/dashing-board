@@ -114,6 +114,7 @@ func requestStopCode(code string) Query {
 	defer resp.Body.Close()
 	if err != nil {
 		fmt.Println("Can't Reach Transit API")
+		return Query{}
 	}
 	b, _ := ioutil.ReadAll(resp.Body)
 	var al Query

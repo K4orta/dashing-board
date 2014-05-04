@@ -11,55 +11,18 @@ var sortByTime = function(input) {
 	});
 };
 
-var DashCtrl = function($scope, $http, $interval) {
-	$scope.weather = {};
+var DashCtrl = function($scope, $http) {
+	// $scope.weather = {};
 
-	//Setup and update the clock
-	$scope.currentTime = moment(new Date().getTime());
-	$interval(function() {
-		$scope.currentTime = moment(new Date().getTime());
-	}, 1000);
+	// $http.get('/weather').then(function(resp) {
+	// 	$scope.weather = resp.data;
+	// });
 
-	$scope.transit = {};
-	$scope.bart = {};
-
-	$http.get('/weather').then(function(resp) {
-		$scope.weather = resp.data;
-	});
-	$http.get('/transit/muni').then(function(resp) {
-		$scope.transit = sortByTime(resp.data);
-	});
-	$http.get('/transit/11').then(function(resp) {
-		$scope.bart = sortByTime(resp.data);
-	});
-
-	$interval(function() {
-		$http.get('/transit/muni').then(function(resp) {
-			$scope.transit = sortByTime(resp.data);
-		});
-		$http.get('/transit/11').then(function(resp) {
-			$scope.bart = sortByTime(resp.data);
-		});
-	}, 60000);
-
-	$interval(function() {
-		$http.get('/weather').then(function(resp) {
-			$scope.weather = resp.data;
-		});
-	}, 300000);
-
-	$scope.routeIcon = function(route) {
-		return "/images/muni/" + route.code + ".svg";
-	};
-
-	$scope.bartRouteClass = function(route) {
-		return "bart-" + route.code;
-	};
-
-	$scope.chopMuniName = function(name) {
-		// console.log()
-		return _.last(name.split("-"));
-	};
+	// $interval(function() {
+	// 	$http.get('/weather').then(function(resp) {
+	// 		$scope.weather = resp.data;
+	// 	});
+	// }, 300000);
 };
 
 app.filter('moment', function() {
@@ -92,3 +55,83 @@ app.filter('weatherIcon', function() {
 		return input;
 	}
 });
+
+app.directive('weather', ['$interval', '$http', function($interval, $http) {
+	return {
+		templateUrl: 'views/weather.html',
+		scope: {},
+		controller: function($scope) {
+			$http.get('/weather').then(function(resp) {
+				$scope.weather = resp.data;
+			});
+
+			$interval(function() {
+				$http.get('/weather').then(function(resp) {
+					$scope.weather = resp.data;
+				});
+			}, 300000);
+		},
+		restrict: 'E'
+	};
+}]);
+
+app.directive('clock', ['$interval', function($interval) {
+	return {
+		templateUrl: 'views/clock.html',
+		scope: {},
+		controller: function($scope) {
+			$interval(function() {
+				$scope.currentTime = moment(new Date().getTime());
+			}, 1000);
+		},
+		link: function(scope, element) {
+			scope.currentTime = moment(new Date().getTime());
+		},
+		restrict: 'E'
+	}
+}]);
+
+app.directive('transit', ['$interval', '$http', function($interval, $http){
+	var sortRoutes = function(directions) {
+		directions.forEach(function(direction) {
+			direction.routes = _.sortBy(direction.routes, function(route) {
+				if (route.departures) {
+					return route.departures[0];
+				}
+				return Math.Infinity; 
+			});
+		});
+		return directions;
+	};
+	return {
+		templateUrl: 'views/transit-stop.html',
+		scope: {
+			transitProvider: '@provider' 
+		},
+		controller: function($scope) {
+			$scope.transitName = $scope.transitProvider.toUpperCase();
+			$scope.chopMuniName = function(name) {
+				return _.last(name.split("-"));
+			};
+
+			$scope.routeIcon = function(route) {
+				return "/images/muni/" + route.code + ".svg";
+			};
+
+			$scope.bartRouteClass = function(route) {
+				return "bart-" + route.code;
+			};
+
+			$http.get('/transit/' + $scope.transitProvider.toLowerCase()).then(function(resp) {
+				$scope.transit = sortRoutes(resp.data);
+			});
+
+			$interval(function() {
+				$http.get('/transit/' + $scope.transitProvider.toLowerCase()).then(function(resp) {
+					$scope.transit = sortRoutes(resp.data);
+				});
+			}, 60000);
+		},
+		restrict: 'E'
+	}
+}]);

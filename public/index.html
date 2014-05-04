@@ -12,70 +12,18 @@
 		<div class="row">
 			<div class="col-md-10">Blizzard Entertainment</div>
 			<div class="col-md-2">
-				<div class="clock">{{currentTime.format('h:mma')}}</div>
-				<div class="date">{{currentTime.format('ddd, MMMM D')}}</div>
+				<clock>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-3" ng-if="weather.currently">
-				<div>Weather</div>
-				<div class="current-weather">
-					<span class="current-weather__temp">
-						<i ng-class="weather.currently.icon | weatherIcon"></i>
-						{{weather.currently.temperature | trunk}}
-						<i class="wi-fahrenheit"></i>
-					</span>
-					<span class="current-weather__summary">{{weather.currently.summary}}</span>
-				</div>
-				
-				<ul class="list-unstyled forecast">
-					<li class="forecast__item" ng-repeat="day in weather.daily.data" ng-class="{'current-day': $index===0}">
-						<div class="forecast__day forecast-col">
-							{{day.time | moment}}
-						</div>
-						<div class="forecast__icon forecast-col">
-							<i ng-class="day.icon | weatherIcon"></i>
-						</div>
-						<div class="forecast__temp forecast-col">
-							{{day.temperatureMax | trunk}} / {{day.temperatureMin | trunk}}
-							<i class="wi-fahrenheit"></i>
-						</div>
-					</li>
-				</ul>
+			<div class="col-md-3">
+				<weather>
 			</div>
 			<div class="col-md-5">
-				<div>Muni</div>
-				<div>Outbound</div>
-				<ul class="list-unstyled">
-					<li ng-repeat="route in transit">
-						<img ng-src="{{routeIcon(route)}}" class="route-icon-muni">
-						{{chopMuniName(route.name)}},
-						<span ng-repeat="time in route.directions[0].departures" ng-class="{'first-time': $index===0}">
-							{{time}},
-						</span>
-					</li>
-				</ul>
-				<div>Inbound</div>
-				<ul class="list-unstyled">
-					<li ng-repeat="route in transit">
-						<img ng-src="{{routeIcon(route)}}" class="route-icon-muni">
-						{{chopMuniName(route.name)}},
-						<span ng-repeat="time in route.directions[1].departures" ng-class="{'first-time': $index===0}">
-							{{time}},
-						</span>
-					</li>
-				</ul>
+				<transit provider="muni">
 			</div>
 			<div class="col-md-4">
-				<div>Bart</div>
-				<ul class="list-unstyled">
-					<li ng-repeat="route in bart" ng-if="route.departures" ng-class="bartRouteClass(route)">
-						{{route.name}}
-						<span ng-repeat="time in route.departures" ng-class="{'first-time': $index===0}">
-							{{time}},
-						</span>
-					</li>
-				</ul>
+				<transit provider="bart">
 			</div>
 		</div>
 	</div>

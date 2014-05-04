@@ -38,11 +38,6 @@ func main() {
 		return transit.Export(ret)
 	})
 
-	// m.Get("/transit/:stopCode", func(params martini.Params) string {
-	// 	ret := transit.DeparturesByStopCode(params["stopCode"])
-	// 	return transit.Export(transit.MergeDirections(ret))
-	// })
-
 	m.Get("/lunch/:marketCode", func(params martini.Params) string {
 		return lunch.GetTrucks(params["marketCode"])
 	})
