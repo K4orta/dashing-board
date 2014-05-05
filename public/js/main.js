@@ -1,28 +1,7 @@
 var app = angular.module('dashboard', []);
 
-var sortByTime = function(input) {
-	if (input[0].directions) {
-		return _.sortBy(input, function(route) {
-			return route.directions[0].departures[0];
-		});
-	}
-	return _.sortBy(_.filter(input, function(route) { return route.departures; }), function(route) {
-		return route.departures[0];
-	});
-};
-
 var DashCtrl = function($scope, $http) {
-	// $scope.weather = {};
 
-	// $http.get('/weather').then(function(resp) {
-	// 	$scope.weather = resp.data;
-	// });
-
-	// $interval(function() {
-	// 	$http.get('/weather').then(function(resp) {
-	// 		$scope.weather = resp.data;
-	// 	});
-	// }, 300000);
 };
 
 app.filter('moment', function() {
@@ -55,6 +34,32 @@ app.filter('weatherIcon', function() {
 		return input;
 	}
 });
+
+app.directive('lunch', ['$interval', '$http', function($interval, $http) {
+	return {
+		templateUrl: 'views/lunch.html',
+		scope: {},
+		controller: function($scope) {
+			$http.get('/lunch/5').then(function(resp) {
+				var out = [];
+				var $dates = $(resp.data).find('.otg-market-data-events-pagination');
+				$dates.each(function() {
+					var day = {};
+					day.date = $.trim($(this).text());
+					day.vendors = [];
+					var $vendors = $(this).find('+ div').find('.otg-markets-data-vendor-name');
+					$vendors.each(function() {
+						day.vendors.push($(this).text());
+					});
+					out.push(day);
+				});
+				$scope.lunch = out;
+			});
+
+		},
+		restrict: 'E'
+	};
+}]);
 
 app.directive('weather', ['$interval', '$http', function($interval, $http) {
 	return {
@@ -93,6 +98,9 @@ app.directive('clock', ['$interval', function($interval) {
 
 app.directive('transit', ['$interval', '$http', function($interval, $http){
 	var sortRoutes = function(directions) {
+		if (directions[0].name == "SF Airport" || directions[0].name == "Inbound") {
+			directions = directions.reverse();
+		}
 		directions.forEach(function(direction) {
 			direction.routes = _.sortBy(direction.routes, function(route) {
 				if (route.departures) {

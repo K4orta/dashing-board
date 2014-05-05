@@ -28,13 +28,11 @@ func main() {
 
 	m.Get("/transit/muni", func(params martini.Params) string {
 		ret := transit.DeparturesByStopCode("16997", "15727")
-		// return string(ret)
 		return transit.Export(ret)
 	})
 
 	m.Get("/transit/bart", func(params martini.Params) string {
 		ret := transit.DeparturesByStopCode("11", "12")
-		// return string(ret)
 		return transit.Export(ret)
 	})
 

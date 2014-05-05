@@ -1,7 +1,7 @@
 <div>Weather</div>
 <div class="current-weather">
+	<i class="current-weather__icon" ng-class="weather.currently.icon | weatherIcon"></i>
 	<span class="current-weather__temp">
-		<i ng-class="weather.currently.icon | weatherIcon"></i>
 		{{weather.currently.temperature | trunk}}
 		<i class="wi-fahrenheit"></i>
 	</span>

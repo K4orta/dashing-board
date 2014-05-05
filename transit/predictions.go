@@ -113,10 +113,14 @@ func requestStopCode(code string) Query {
 	resp, err := http.Get(apiUrl + code)
 	defer resp.Body.Close()
 	if err != nil {
-		fmt.Println("Can't Reach Transit API")
+		fmt.Println("Can't reach transit API")
 		return Query{}
 	}
-	b, _ := ioutil.ReadAll(resp.Body)
+	b, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println("Error reading transit API response")
+		return Query{}
+	}
 	var al Query
 	xml.Unmarshal(b, &al)
 	return al

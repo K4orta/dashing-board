@@ -4,9 +4,9 @@
 	<ul class="list-unstyled">
 		<li ng-repeat="route in direction.routes" ng-class="{'bart-route': transitProvider==='bart'}" code="{{route.code}}" ng-if="route.departures">
 			<img ng-src="{{routeIcon(route)}}" class="route-icon-muni" ng-if="transitProvider==='muni'">
-			{{chopMuniName(route.name)}},
+			{{chopMuniName(route.name)}}
 			<span ng-repeat="time in route.departures" ng-class="{'first-time': $index===0}">
-				{{time}},
+				{{time}}{{($index!=route.departures.length-1)?",":""}}
 			</span>
 		</li>
 	</ul>
