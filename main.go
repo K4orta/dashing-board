@@ -24,19 +24,19 @@ func main() {
 		resp, _ := http.Get("https://api.forecast.io/forecast/" + weatherApiKey + "/37.779352,-122.413247")
 		defer resp.Body.Close()
 		content, _ := ioutil.ReadAll(resp.Body)
-		setMaxAge(&res, 250000)
+		setMaxAge(&res, 290)
 		res.Write(content)
 	})
 
 	m.Get("/transit/muni", func(res http.ResponseWriter, req *http.Request) {
 		ret := transit.DeparturesByStopCode("16997", "15727")
-		setMaxAge(&res, 50000)
+		setMaxAge(&res, 50)
 		res.Write(transit.Export(ret))
 	})
 
 	m.Get("/transit/bart", func(res http.ResponseWriter, req *http.Request) {
 		ret := transit.DeparturesByStopCode("11", "12")
-		setMaxAge(&res, 50000)
+		setMaxAge(&res, 50)
 		res.Write(transit.Export(ret))
 	})
 
