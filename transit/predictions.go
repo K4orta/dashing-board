@@ -126,7 +126,7 @@ func requestStopCode(code string) Query {
 	return al
 }
 
-func Export(q []*RouteDirection) string {
+func Export(q []*RouteDirection) []byte {
 	out, _ := json.Marshal(q)
-	return string(out)
+	return out
 }

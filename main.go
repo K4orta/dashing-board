@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strconv"
 )
 
 func main() {
@@ -19,21 +20,24 @@ func main() {
 		return "Hello World"
 	})
 
-	m.Get("/weather", func() string {
-		resp, _ := http.Get("https://api.forecast.io/forecast/" + weatherApiKey + "/37.7796643,-122.4136685")
+	m.Get("/weather", func(res http.ResponseWriter, req *http.Request) {
+		resp, _ := http.Get("https://api.forecast.io/forecast/" + weatherApiKey + "/37.779352,-122.413247")
 		defer resp.Body.Close()
 		content, _ := ioutil.ReadAll(resp.Body)
-		return string(content)
+		setMaxAge(&res, 250000)
+		res.Write(content)
 	})
 
-	m.Get("/transit/muni", func(params martini.Params) string {
+	m.Get("/transit/muni", func(res http.ResponseWriter, req *http.Request) {
 		ret := transit.DeparturesByStopCode("16997", "15727")
-		return transit.Export(ret)
+		setMaxAge(&res, 50000)
+		res.Write(transit.Export(ret))
 	})
 
-	m.Get("/transit/bart", func(params martini.Params) string {
+	m.Get("/transit/bart", func(res http.ResponseWriter, req *http.Request) {
 		ret := transit.DeparturesByStopCode("11", "12")
-		return transit.Export(ret)
+		setMaxAge(&res, 50000)
+		res.Write(transit.Export(ret))
 	})
 
 	m.Get("/lunch/:marketCode", func(params martini.Params) string {
@@ -44,7 +48,15 @@ func main() {
 		return news.YCombinator()
 	})
 
+	m.Get("/ping", func() string {
+		return "pong"
+	})
+
 	m.Use(martini.Static("public"))
-	m.Run()
 	fmt.Println("Started Dashboard Server")
+	m.Run()
+}
+
+func setMaxAge(res *http.ResponseWriter, maxAge int) {
+	(*res).Header().Set("Cache-Control", "public, max-age="+strconv.Itoa(maxAge))
 }
