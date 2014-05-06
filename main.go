@@ -48,7 +48,7 @@ func main() {
 		return news.YCombinator()
 	})
 
-	m.Get("/ping", func() string {
+	m.Get("/systems/ping", func() string {
 		return "pong"
 	})
 
