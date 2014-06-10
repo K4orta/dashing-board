@@ -127,6 +127,9 @@ func requestStopCode(code string) Query {
 }
 
 func Export(q []*RouteDirection) []byte {
-	out, _ := json.Marshal(q)
+	out, err := json.Marshal(q)
+	if err != nil {
+		return []byte("{}")
+	}
 	return out
 }

@@ -6,26 +6,26 @@ import (
 	"github.com/k4orta/dashing-board/lunch"
 	"github.com/k4orta/dashing-board/news"
 	"github.com/k4orta/dashing-board/transit"
-	"io/ioutil"
+	"github.com/k4orta/dashing-board/weather"
 	"net/http"
-	"os"
 	"strconv"
 )
 
 func main() {
 	m := martini.Classic()
-	weatherApiKey := os.Getenv("FORECAST_API_KEY")
 
 	m.Get("/", func() string {
 		return "Hello World"
 	})
 
 	m.Get("/weather", func(res http.ResponseWriter, req *http.Request) {
-		resp, _ := http.Get("https://api.forecast.io/forecast/" + weatherApiKey + "/37.779352,-122.413247")
-		defer resp.Body.Close()
-		content, _ := ioutil.ReadAll(resp.Body)
+		ret, err := weather.Forecast("37.779352", "-122.413247")
 		setMaxAge(&res, 290)
-		res.Write(content)
+		if err != nil {
+			res.WriteHeader(500)
+			res.Write([]byte("Error fetching weather"))
+		}
+		res.Write(ret)
 	})
 
 	m.Get("/transit/muni", func(res http.ResponseWriter, req *http.Request) {
