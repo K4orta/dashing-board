@@ -111,11 +111,11 @@ func DeparturesByStopCode(codes ...string) []*RouteDirection {
 
 func requestStopCode(code string) Query {
 	resp, err := http.Get(apiUrl + code)
-	defer resp.Body.Close()
 	if err != nil {
 		fmt.Println("Can't reach transit API")
 		return Query{}
 	}
+	defer resp.Body.Close()
 	b, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println("Error reading transit API response")
