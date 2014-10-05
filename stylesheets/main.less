@@ -1,15 +1,5 @@
-@font-face {
-	font-family: "Clear Sans";
-	src: url("/fonts/ClearSans-Light.eot");
-	src: url("/fonts/ClearSans-Light.eot") format("embedded-opentype"), url("/fonts/ClearSans-Light.woff") format("woff"), url("/fonts/ClearSans-Light.ttf") format("truetype"), url("/fonts/ClearSans-Light.svg") format("svg");
-}
-
-@font-face {
-	font-family: "Clear Sans";
-	src: url("/fonts/ClearSans-Bold.eot");
-	src: url("/fonts/ClearSans-Bold.eot") format("embedded-opentype"), url("/fonts/ClearSans-Bold.woff") format("woff"), url("/fonts/ClearSans-Bold.ttf") format("truetype"), url("/fonts/ClearSans-Bold.svg") format("svg");
-	font-weight: 900;
-}
+@import "_typography";
+@import "_transit";
 
 @body-size: 24px;
 
@@ -90,56 +80,18 @@ body {
 	margin-top: -2px;
 }
 
-.bart-swatch(@route-color) {
-	position: relative;
-	padding-left: 1rem;
-	&:before {
-		content: "";
-		position: absolute;
-		left: 0;
-		top: .35rem;
-		width: .75rem;
-		height: .75rem;
-		background-color: @route-color;
-	}
+
+.bg-video {
+	position: absolute;
+	width: 100%;
+	height: 100%;
 }
 
-.bart-route{
-	// Richmond
-	&[code="762"] {
-		.bart-swatch(#ff001a);
-	}
-	
-	// Bay Point
-	&[code="908"] {
-		.bart-swatch(#ffe700);
-	}
-
-	&[code="920"] {
-		.bart-swatch(#00b2f1);
-	}
-
-	&[code="917"] {
-		.bart-swatch(#ff9f00);
-	}
-	
-	// SFO
-	&[code="831"] {
-		.bart-swatch(#ff001a);
-	}
-
-	// Daily City
-	&[code="747"] {
-		.bart-swatch(#ffe700);
-	}
-
-	// SFO Airport
-	&[code="864"] {
-		.bart-swatch(#ff001a);
-	}
-
-	// SFO Milbrae
-	&[code="764"] {
-		.bart-swatch(#ff001a);
-	}
+.bg-overlay {
+	background-color: fade(#555, 50%);
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
 }

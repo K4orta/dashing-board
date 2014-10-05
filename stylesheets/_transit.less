@@ -1,0 +1,54 @@
+
+.bart-swatch(@route-color) {
+	position: relative;
+	padding-left: 1rem;
+	&:before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: .35rem;
+		width: .75rem;
+		height: .75rem;
+		background-color: @route-color;
+	}
+}
+
+.bart-route{
+	// Richmond
+	&[code="762"] {
+		.bart-swatch(#ff001a);
+	}
+	
+	// Bay Point
+	&[code="908"] {
+		.bart-swatch(#ffe700);
+	}
+
+	&[code="920"] {
+		.bart-swatch(#00b2f1);
+	}
+
+	&[code="917"] {
+		.bart-swatch(#ff9f00);
+	}
+	
+	// SFO
+	&[code="831"] {
+		.bart-swatch(#ff001a);
+	}
+
+	// Daily City
+	&[code="747"] {
+		.bart-swatch(#ffe700);
+	}
+
+	// SFO Airport
+	&[code="864"] {
+		.bart-swatch(#ff001a);
+	}
+
+	// SFO Milbrae
+	&[code="764"] {
+		.bart-swatch(#ff001a);
+	}
+}
