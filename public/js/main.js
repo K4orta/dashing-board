@@ -1,7 +1,21 @@
 var app = angular.module('dashboard', []);
 
-var DashCtrl = function($scope, $http) {
+var pickModules = function($scope) {
+	
+}; 
 
+var DashCtrl = function($scope, $http, $interval) {
+	$scope.show = {
+		transit: true,
+		weather: true
+	};
+
+	$interval(function() {
+		if(new moment().hour() > 15) {
+			$scope.show.transit = false;
+		}
+	}, 60000);
+	// console.l
 };
 
 app.filter('moment', function() {
@@ -26,13 +40,13 @@ app.filter('weatherIcon', function() {
 		'rain': 'rain',
 		'cloudy': 'cloudy',
 		'wind': 'cloudy-gusts'
-	}
+	};
 	return function(input) {
 		if(weatherIcons[input]){
 			return 'wi-' + weatherIcons[input];
 		} 
 		return input;
-	}
+	};
 });
 
 app.directive('lunch', ['$interval', '$http', function($interval, $http) {
@@ -42,6 +56,7 @@ app.directive('lunch', ['$interval', '$http', function($interval, $http) {
 		controller: function($scope) {
 			$http.get('/lunch/5').then(function(resp) {
 				var out = [];
+				// TODO: Move this parsing logic to the backend
 				var $dates = $(resp.data).find('.otg-market-data-events-pagination');
 				$dates.each(function() {
 					var day = {};
@@ -65,6 +80,7 @@ app.directive('weather', ['$interval', '$http', function($interval, $http) {
 	return {
 		templateUrl: 'views/weather.html',
 		scope: {},
+		className: 'weather-containter',
 		controller: function($scope) {
 			$http.get('/weather').then(function(resp) {
 				$scope.weather = resp.data;
@@ -96,7 +112,37 @@ app.directive('clock', ['$interval', function($interval) {
 	}
 }]);
 
-app.directive('transit', ['$interval', '$http', function($interval, $http){
+app.directive('livevideo', ['$interval', function($interval) {
+	var videos = {
+		'hummingBirds': 13340773,
+		'kelpForest': 9948292,
+		'openOcean': 9600798,
+		'space': 17074538
+	};
+
+	var randomVideo = function($sce) {
+		var videoIds =  _.values(videos);
+		var randomVideo = videoIds[_.random(videoIds.length-1)];
+		return $sce.trustAsResourceUrl('http://www.ustream.tv/embed/' + randomVideo + '?v=3&wmode=direct&controls=false&autoplay=true');
+	};
+
+	var minutesBeforeRefresh = 30;
+
+	return {
+		templateUrl: 'views/livevideo.html',
+		scope: {},
+		controller: function($scope, $sce) {
+			$scope.currentVideo = randomVideo($sce);
+
+			$interval(function() {
+				$scope.currentVideo = randomVideo($sce);
+			}, minutesBeforeRefresh * 1000 * 60);
+		},
+		restrict: 'E'
+	}
+}]);
+
+app.directive('transit', ['$interval', '$http', function($interval, $http) {
 	var sortRoutes = function(directions) {
 		if (directions[0].name == "SF Airport" || directions[0].name == "Inbound") {
 			directions = directions.reverse();
@@ -141,5 +187,5 @@ app.directive('transit', ['$interval', '$http', function($interval, $http){
 			}, 60000);
 		},
 		restrict: 'E'
-	}
+	};
 }]);

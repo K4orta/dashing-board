@@ -2,12 +2,14 @@
 <div class="tranist-direction" ng-repeat="direction in transit">
 	<div>{{direction.name}}</div>
 	<ul class="list-unstyled">
-		<li ng-repeat="route in direction.routes" ng-class="{'bart-route': transitProvider==='bart'}" code="{{route.code}}" ng-if="route.departures">
+		<li class="route" ng-repeat="route in direction.routes track by $index" ng-class="{'bart-route': transitProvider==='bart'}" code="{{route.code}}" ng-if="route.departures">
 			<img ng-src="{{routeIcon(route)}}" class="route-icon-muni" ng-if="transitProvider==='muni'">
 			{{chopMuniName(route.name)}}
-			<span ng-repeat="time in route.departures" ng-class="{'first-time': $index===0}">
+			<ul class="arrival-times">
+			<li ng-repeat="time in route.departures track by $index" ng-class="{'first-time': $index===0}">
 				{{time}}{{($index!=route.departures.length-1)?",":""}}
-			</span>
+			</li>
+			</ul>
 		</li>
 	</ul>
 </div>

@@ -1,4 +1,35 @@
 
+.transit-container {
+	font-size: 1.25rem;
+	text-align: center;
+}
+
+transit {
+	display: inline-block;
+	text-align: left;
+	min-width: 90%;
+}
+
+.first-time {
+	margin-left: 1rem;
+}
+
+.route {
+	border-bottom: 3px solid fade(white, 10%);
+	padding-bottom: .1rem;
+}
+
+.arrival-times {
+	display: inline;
+	float: right;
+	list-style-type: none;
+}
+
+.arrival-times li {
+	float: left;
+	margin-left: .25rem;
+}
+
 .bart-swatch(@route-color) {
 	position: relative;
 	padding-left: 1rem;
@@ -6,7 +37,7 @@
 		content: "";
 		position: absolute;
 		left: 0;
-		top: .35rem;
+		top: .58rem;
 		width: .75rem;
 		height: .75rem;
 		background-color: @route-color;
@@ -49,6 +80,10 @@
 
 	// SFO Milbrae
 	&[code="764"] {
+		.bart-swatch(#ff001a);
+	}
+
+	&[code="1561"] {
 		.bart-swatch(#ff001a);
 	}
 }
