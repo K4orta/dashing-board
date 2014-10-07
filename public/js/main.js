@@ -1,21 +1,20 @@
 var app = angular.module('dashboard', []);
 
-var pickModules = function($scope) {
-	
-}; 
+var shouldShowTransit = function(hour) {
+	return hour >= 15;
+};
 
 var DashCtrl = function($scope, $http, $interval) {
 	$scope.show = {
 		transit: true,
-		weather: true
+		weather: true,
+		lunch: false
 	};
 
 	$interval(function() {
-		if(new moment().hour() > 15) {
-			$scope.show.transit = false;
-		}
-	}, 60000);
-	// console.l
+		var hour = new moment().hour();
+		$scope.show.transit = shouldShowTransit(hour);
+	}, 15 * 1000 * 60);
 };
 
 app.filter('moment', function() {
