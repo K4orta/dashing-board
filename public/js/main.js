@@ -10,12 +10,13 @@ var DashCtrl = function($scope, $http, $interval) {
 		weather: true,
 		lunch: false
 	};
-
+	$scope.show.transit = shouldShowTransit(new moment().hour());
 	$interval(function() {
-		var hour = new moment().hour();
-		$scope.show.transit = shouldShowTransit(hour);
+		$scope.show.transit = shouldShowTransit(new moment().hour());
 	}, 15 * 1000 * 60);
 };
+
+app.controller('DashCtrl', DashCtrl);
 
 app.filter('moment', function() {
 	return function(input) {
@@ -26,7 +27,7 @@ app.filter('moment', function() {
 app.filter('trunk', function() {
 	return function(input) {
 		return Math.round(input);
-	}
+	};
 });
 
 app.filter('weatherIcon', function() {
@@ -116,7 +117,8 @@ app.directive('livevideo', ['$interval', function($interval) {
 		'hummingBirds': 13340773,
 		'kelpForest': 9948292,
 		'openOcean': 9600798,
-		'space': 17074538
+		'space': 17074538,
+		'alaska': 12431893
 	};
 
 	var randomVideo = function($sce) {
