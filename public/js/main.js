@@ -1,6 +1,6 @@
 var app = angular.module('dashboard', []);
 
-$('html').snowfall({round : true, minSize: 2, maxSize:10});
+$('html').snowfall({image: '/vendor/jquery-snowfall/examples/images/flake.png', minSize: 2, maxSize:32, maxSpeed : 2});
 
 var shouldShowTransit = function(hour) {
 	return hour >= 15;
@@ -179,7 +179,6 @@ app.directive('transit', ['$interval', '$http', function($interval, $http) {
 
 			$http.get('/transit/' + $scope.transitProvider.toLowerCase()).then(function(resp) {
 				$scope.transit = sortRoutes(resp.data);
-				console.log($scope.transit);
 			});
 
 			$interval(function() {
