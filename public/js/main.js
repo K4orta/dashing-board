@@ -1,5 +1,7 @@
 var app = angular.module('dashboard', []);
 
+$('html').snowfall({round : true, minSize: 2, maxSize:10});
+
 var shouldShowTransit = function(hour) {
 	return hour >= 15;
 };
