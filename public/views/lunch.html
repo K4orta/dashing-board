@@ -1,4 +1,6 @@
-Vendors
-<ul class="list-unstyled">
-	<li ng-repeat="vendor in lunch[0].vendors" >{{vendor}}</li>
-</ul>
+<div class="vendors" ng-show="lunch">
+	<span class="vendor-label">Todays Vendors:</span>
+	<ul class="list-unstyled vendor-list">
+		<li class="lunch-vendor {{sluggify(vendor)}}" ng-repeat="vendor in lunch.vendors" >{{vendor}}</li>
+	</ul>
+</div>

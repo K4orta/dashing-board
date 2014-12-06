@@ -4,15 +4,21 @@ var shouldShowTransit = function(hour) {
 	return hour >= 15;
 };
 
+var shouldShowLunch = function(hour) {
+	return hour >= 7 && hour < 15;
+};
+
 var DashCtrl = function($scope, $http, $interval) {
 	$scope.show = {
 		transit: true,
 		weather: true,
-		lunch: false
+		lunch: true
 	};
 	$scope.show.transit = shouldShowTransit(new moment().hour());
+	$scope.show.lunch = shouldShowLunch(new moment().hour());
 	$interval(function() {
 		$scope.show.transit = shouldShowTransit(new moment().hour());
+		$scope.show.lunch = shouldShowLunch(new moment().hour());
 	}, 15 * 1000 * 60);
 };
 
@@ -21,7 +27,7 @@ app.controller('DashCtrl', DashCtrl);
 app.filter('moment', function() {
 	return function(input) {
 		return moment(input * 1000).format('ddd');
-	}
+	};
 });
 
 app.filter('trunk', function() {
@@ -54,23 +60,15 @@ app.directive('lunch', ['$interval', '$http', function($interval, $http) {
 		templateUrl: 'views/lunch.html',
 		scope: {},
 		controller: function($scope) {
+			$scope.sluggify = function(input) {
+				return input.replace(/[ ]|[\']/g, '-').toLowerCase();
+			};
 			$http.get('/lunch/5').then(function(resp) {
-				var out = [];
-				// TODO: Move this parsing logic to the backend
-				var $dates = $(resp.data).find('.otg-market-data-events-pagination');
-				$dates.each(function() {
-					var day = {};
-					day.date = $.trim($(this).text());
-					day.vendors = [];
-					var $vendors = $(this).find('+ div').find('.otg-markets-data-vendor-name');
-					$vendors.each(function() {
-						day.vendors.push($(this).text());
-					});
-					out.push(day);
+				var time = moment();
+				$scope.lunch = _.find(resp.data, function(otg) {
+					return otg.day === time.date() && otg.month === (time.month() + 1);
 				});
-				$scope.lunch = out;
 			});
-
 		},
 		restrict: 'E'
 	};
@@ -179,6 +177,7 @@ app.directive('transit', ['$interval', '$http', function($interval, $http) {
 
 			$http.get('/transit/' + $scope.transitProvider.toLowerCase()).then(function(resp) {
 				$scope.transit = sortRoutes(resp.data);
+				console.log($scope.transit);
 			});
 
 			$interval(function() {

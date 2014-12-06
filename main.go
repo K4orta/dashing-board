@@ -40,8 +40,14 @@ func main() {
 		res.Write(transit.Export(ret))
 	})
 
-	m.Get("/lunch/:marketCode", func(params martini.Params) string {
-		return lunch.GetTrucks(params["marketCode"])
+	m.Get("/lunch/:marketCode", func(res http.ResponseWriter, req *http.Request, params martini.Params) {
+		ret, err := lunch.GetTrucks(params["marketCode"])
+		if err != nil {
+			res.WriteHeader(500)
+			res.Write([]byte("Error fetching trucks"))
+		}
+		setMaxAge(&res, 290)
+		res.Write(ret)
 	})
 
 	m.Get("/news", func() string {

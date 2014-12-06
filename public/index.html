@@ -7,11 +7,13 @@
 	<link rel="stylesheet" href="css/main.css">
 </head>
 <body ng-controller="DashCtrl">
-	<livevideo></livevideo>
+	<!-- <livevideo></livevideo> -->
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-10">Blizzard Entertainment</div>
-			<div class="col-md-2">
+			<div class="col-xs-10">
+				<img src="images/blizz-logo.svg" class="company-logo" alt="Blizzard">
+			</div>
+			<div class="col-xs-2">
 				<clock>
 			</div>
 		</div>
@@ -21,6 +23,11 @@
 			</div>
 			<div class="col-md-6">
 				<div><transit provider="bart"></div>
+			</div>
+		</div>
+		<div class="row lunch-container" ng-show="show.lunch">
+			<div class="col-md-12">
+				<lunch>
 			</div>
 		</div>
 		<div class="row snap-bottom">
