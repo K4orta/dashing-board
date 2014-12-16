@@ -71,6 +71,15 @@ app.directive('lunch', ['$interval', '$http', function($interval, $http) {
 					return otg.day === time.date() && otg.month === (time.month() + 1);
 				});
 			});
+
+			$interval(function() {
+				$http.get('/lunch/5').then(function(resp) {
+				var time = moment();
+					$scope.lunch = _.find(resp.data, function(otg) {
+						return otg.day === time.date() && otg.month === (time.month() + 1);
+					});
+				});
+			}, 300000);
 		},
 		restrict: 'E'
 	};
