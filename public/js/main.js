@@ -1,7 +1,5 @@
 var app = angular.module('dashboard', []);
 
-$('html').snowfall({image: '/vendor/jquery-snowfall/examples/images/flake.png', minSize: 2, maxSize:32, maxSpeed : 2});
-
 var shouldShowTransit = function(hour) {
 	return hour >= 15;
 };
