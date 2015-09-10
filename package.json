@@ -1,9 +1,14 @@
 {
   "name": "dashing-board",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "devDependencies": {
+    "babel": "^5.8.23",
     "grunt": "~0.4.2",
-    "grunt-contrib-watch": "*",
-    "grunt-contrib-less": "~0.11.0"
+    "grunt-contrib-less": "~0.11.0",
+    "grunt-contrib-watch": "*"
+  },
+  "dependencies": {
+    "react": "^0.14.0-rc1",
+    "react-dom": "^0.14.0-rc1"
   }
 }
