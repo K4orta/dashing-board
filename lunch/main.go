@@ -29,7 +29,9 @@ func GetTrucks(marketCode string) ([]byte, error) {
 		vendorsElement := doc.Find(".otg-market-data-vendors-names").Eq(i)
 		vendors := []string{}
 		vendorsElement.Find(".otg-markets-data-vendor-name").Each(func(j int, vendor *goquery.Selection) {
-			vendors = append(vendors, strings.TrimSpace(vendor.Text()))
+			vendorName := strings.TrimSpace(vendor.Text())
+			vendorName = strings.Replace(vendorName, " (1)", "", -1)
+			vendors = append(vendors, vendorName)
 		})
 
 		intMonth, err := strconv.Atoi(date[0])
