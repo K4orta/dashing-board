@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/go-martini/martini"
-	"github.com/k4orta/dashing-board/lunch"
-	"github.com/k4orta/dashing-board/news"
-	"github.com/k4orta/dashing-board/transit"
-	"github.com/k4orta/dashing-board/weather"
 	"net/http"
 	"strconv"
+
+	"github.com/go-martini/martini"
+	"github.com/k4orta/dashing-board/lunch"
+	"github.com/k4orta/dashing-board/transit"
+	"github.com/k4orta/dashing-board/weather"
 )
 
 func main() {
@@ -48,10 +48,6 @@ func main() {
 		}
 		setMaxAge(&res, 290)
 		res.Write(ret)
-	})
-
-	m.Get("/news", func() string {
-		return news.YCombinator()
 	})
 
 	m.Get("/systems/ping", func() string {

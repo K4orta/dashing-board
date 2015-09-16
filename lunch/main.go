@@ -2,10 +2,11 @@ package lunch
 
 import (
 	"encoding/json"
-	"github.com/PuerkitoBio/goquery"
 	"log"
 	"strconv"
 	"strings"
+
+	"github.com/PuerkitoBio/goquery"
 )
 
 type offTheGrid struct {
@@ -31,6 +32,7 @@ func GetTrucks(marketCode string) ([]byte, error) {
 		vendorsElement.Find(".otg-markets-data-vendor-name").Each(func(j int, vendor *goquery.Selection) {
 			vendorName := strings.TrimSpace(vendor.Text())
 			vendorName = strings.Replace(vendorName, " (1)", "", -1)
+			vendorName = strings.Replace(vendorName, " (2)", "", -1)
 			vendors = append(vendors, vendorName)
 		})
 

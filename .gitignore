@@ -2,3 +2,5 @@ node_modules
 *.DStore
 *.css
 public/vendor/
+*.js.map
+public/dist/
