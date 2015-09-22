@@ -7,6 +7,9 @@ var buildPath = path.resolve(__dirname, 'dist');
 
 module.exports = {
 	devtool: 'source-map',
+	devServer: {
+		contentBase: 'public'
+	},
 	entry: [
 		'webpack/hot/dev-server',
 		'webpack-dev-server/client?http://localhost:8080',
