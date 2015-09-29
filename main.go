@@ -9,6 +9,7 @@ import (
 	"github.com/k4orta/dashing-board/lunch"
 	"github.com/k4orta/dashing-board/transit"
 	"github.com/k4orta/dashing-board/weather"
+	"github.com/martini-contrib/cors"
 )
 
 func main() {
@@ -55,6 +56,13 @@ func main() {
 	})
 
 	m.Use(martini.Static("public"))
+	m.Use(cors.Allow(&cors.Options{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"PUT", "PATCH"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+	}))
 	fmt.Println("Started Dashboard Server")
 	m.Run()
 }

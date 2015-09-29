@@ -1,7 +1,26 @@
+require('../../stylesheets/main');
 import React from 'react';
+
+import { connect } from 'react-redux';
+
+import Video from '../components/video-bg';
+import Clock from '../components/clock';
+import Calendar from '../containers/calendar-container';
+import Weather from '../containers/weather-container';
+
+
 
 export default class Dashboard extends React.Component {
   render() {
-    return <h1>HELLO!</h1>
+    return (
+      <div className='container' >
+        <Video />
+        <div className='time-container'>
+          <Clock />
+          <Calendar />
+        </div>
+        <Weather />
+      </div>
+    );
   }
 }
