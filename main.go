@@ -55,6 +55,18 @@ func main() {
 		return "pong"
 	})
 
+	shouldRefresh := false
+	m.Get("/systems/refresh", func() string {
+		sr := shouldRefresh
+		shouldRefresh = false
+		return `{"refresh": ` + strconv.FormatBool(sr) + `}`
+	})
+
+	m.Post("/systems/refresh", func(res http.ResponseWriter, req *http.Request) {
+		shouldRefresh = true
+		res.Write([]byte("ok"))
+	})
+
 	m.Use(martini.Static("public"))
 	m.Use(cors.Allow(&cors.Options{
 		AllowOrigins:     []string{"*"},
