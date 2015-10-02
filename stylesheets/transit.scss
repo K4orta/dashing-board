@@ -1,5 +1,10 @@
 .transit {
-  padding: 1rem;  
+  padding: 1rem;
+}
+
+.transit__direction {
+  margin-bottom: 2rem;
+  padding: 0 1rem;
 }
 
 .route__label {
@@ -9,6 +14,11 @@
 .route__departures {
   display: inline-block;
   float: right;
+}
+
+.route {
+  padding: 0.25em 0;
+  border-bottom: 2px solid rgba(white, .5);
 }
 
 .route__departures__time {

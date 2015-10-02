@@ -3,7 +3,7 @@ import Route from './route';
 export default class Direction extends React.Component {
   render() {
     let routes = this.props.routes.map((route) => {
-      return <Route {...route} />
+      return <Route {...route} key={route.code} />
     });
     return (
       <div className='transit__direction'>

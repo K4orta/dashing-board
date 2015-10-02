@@ -24,8 +24,7 @@ export default class Calendar extends React.Component {
 
     return (
       <div className='calendar'>
-        <div className='calendar__dateline'>{t.format('MMM Do')}</div>
-        <ul className='calendar__legend'>
+        <ul className='calendar__legend clearfix'>
           <li className='calendar__legend__label'>S</li>
           <li className='calendar__legend__label'>M</li>
           <li className='calendar__legend__label'>T</li>

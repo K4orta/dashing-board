@@ -11,7 +11,7 @@ body {
   margin: 0;
   padding: 0;
   color: white;
-  font-size: 200%;
+  font-size: 250%;
   font-family: 'Ubuntu', sans-serif;
   font-weight: 300;
   overflow: hidden;
@@ -30,4 +30,14 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
 }

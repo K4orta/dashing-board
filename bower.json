@@ -2,6 +2,7 @@
   "name": "dashing-board",
   "version": "2.0.0",
   "dependencies": {
-    "weather-icons": "~2.0.7"
+    "weather-icons": "~2.0.7",
+    "font-awesome": "~4.4.0"
   }
 }

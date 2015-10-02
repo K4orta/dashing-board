@@ -7,13 +7,15 @@ export default class Transit extends React.Component {
     let { fetchMuni, fetchBart } = this.props;
     fetchMuni();
     fetchBart();
-    // fetchMuni();
   }
   render() {
-    let muni = this.props.transit.muni.map((direction) => {
-      return <Direction {...direction} />
+    let muni = this.props.transit.muni.map((direction, i) => {
+      return <Direction {...direction} key={'muni-' + i} />
     });
-    let bart = [];
+    console.log(this.props.transit.bart);
+    let bart = this.props.transit.bart.map((direction, i) => {
+      return <Direction {...direction} key={'bart-' + i} />
+    });
     return (
       <div className='transit'>
         <div className='row'>

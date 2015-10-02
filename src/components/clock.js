@@ -6,24 +6,22 @@ export default class Clock extends React.Component {
   constructor() {
     super();
     this.state = {
-      time: this._currentFormattedTime()
+      time: moment()
     };
   }
   componentDidMount() {
       setInterval(() => {
         this.setState({
-          time: this._currentFormattedTime()
+          time: moment()
         });
       }, 1000);
   }
   render() {
     return (
       <div className='clock'>
-        {this.state.time}
+        {this.state.time.format('h:mma')}
+        <div className='calendar__dateline'>{this.state.time.format('MMM Do')}</div>
       </div>
     );
-  }
-  _currentFormattedTime() {
-    return moment().format('h:mma');
   }
 }

@@ -1,0 +1,78 @@
+.muni-route-icon {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: bottom;
+  background-size: contain;
+  margin-right: .5em;
+}
+
+$muni: KT N J L M;
+$muni-colors: (
+  KT: #F60043,
+  N: #00549C,
+  J: #FF9F25,
+  L: #A9048E,
+  M: #008B50
+);
+
+@each $line in $muni {
+  .route[data-code='#{$line}']:before {
+    @extend .muni-route-icon;
+    background-image: url('/images/muni/#{$line}.svg');
+  }
+
+  .route[data-code='#{$line}'] .route__departures__time {
+    color: lighten(map-get($muni-colors, $line), 10%);
+  }
+
+  .route[data-code='#{$line}'] .route__departures__time:first-child {
+    font-weight: bold;
+    color: lighten(map-get($muni-colors, $line), 20%);
+  }
+}
+
+$bart: 762 237 908 920 917 831 747 864 764 1561 722;
+$bart-colors: (
+  762: #ff001a,
+  237: #ff001a,
+  908: #ffe700,
+  920: #00b2f1,
+  917: #ff9f00,
+  831: #ff001a,
+  747: #ffe700,
+  864: #ff001a,
+  764: #ff001a,
+  1561: #ff001a,
+  722: #ffe700
+);
+
+.bart-route-icon {
+  content: '';
+  display: inline-block;
+  width: .6em;
+  height: .6em;
+  margin-top: .35rem;
+  vertical-align: middle;
+  background-size: contain;
+  margin-right: .5em;
+}
+
+
+@each $line in $bart {
+  .route[data-code='#{$line}']:before {
+    @extend .bart-route-icon;
+    background-color: map-get($bart-colors, $line);
+    border-radius: .3333rem;
+  }
+
+  .route[data-code='#{$line}'] .route__departures__time {
+    color: lighten(map-get($bart-colors, $line), 10%);
+  }
+
+  .route[data-code='#{$line}'] .route__departures__time:first-child {
+    font-weight: bold;
+    color: lighten(map-get($bart-colors, $line), 20%);
+  }
+}

@@ -1,3 +1,4 @@
 export default (name) => {
-  return name.split('-')[1];
+  return name.split('-')[1].replace('Ingleside ', '');
+
 };

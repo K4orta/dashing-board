@@ -1,3 +1,8 @@
+.calendar {
+  float: left;
+  margin-right: 1rem;
+}
+
 .calendar__day {
   width: .5rem;
   height: .5rem;
@@ -13,6 +18,7 @@
 .calendar__legend__label {
   float: left;
   margin: .5rem 0.425rem;
+  margin-bottom: .25rem;
   font-size: 1rem;
 }
 

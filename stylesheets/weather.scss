@@ -1,18 +1,18 @@
 .forecast {
   position: absolute;
-  text-align: center;
-  padding: 1rem;
   display: inline-block;
-  bottom: 0;
-  right: 0;
   left: 0;
+  bottom: 0;
+  padding: 1rem;
+
+  text-align: center;
 }
 
 .day {
   display: inline-block;
   position: relative;
   text-align: center;
-  width: 8rem;
+  width: 5em;
 }
 
 .day:after {
@@ -30,6 +30,6 @@
 }
 
 .day__icon {
-  font-size: 2rem;
+  font-size: 2em;
   line-height: 2;
 }
