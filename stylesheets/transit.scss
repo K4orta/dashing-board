@@ -1,0 +1,25 @@
+.transit {
+  padding: 1rem;  
+}
+
+.route__label {
+  display: inline-block;
+}
+
+.route__departures {
+  display: inline-block;
+  float: right;
+}
+
+.route__departures__time {
+  float: left;
+  margin-right: .5rem;
+}
+
+.route__departures__time:after {
+  content: ',';
+}
+
+.route__departures__time:last-child:after {
+  content: '';
+}
