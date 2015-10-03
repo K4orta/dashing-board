@@ -14,6 +14,10 @@ export default (state = {
       action.muni.forEach((dir) => {
         dir.routes.forEach((route) => {
           route.name = trimMuni(route.name);
+          if (dir.name === 'Outbound' && route.name === 'Third Street') {
+            route.name = 'Balboa Park'
+            route.code = 'K'
+          }
         });
         dir.routes = sortRoutes(dir.routes);
       });

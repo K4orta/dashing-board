@@ -8,6 +8,7 @@ import (
 	"github.com/go-martini/martini"
 	"github.com/k4orta/dashing-board/lunch"
 	"github.com/k4orta/dashing-board/transit"
+	"github.com/k4orta/dashing-board/video"
 	"github.com/k4orta/dashing-board/weather"
 	"github.com/martini-contrib/cors"
 )
@@ -66,6 +67,10 @@ func main() {
 		shouldRefresh = true
 		res.Write([]byte("ok"))
 	})
+
+	m.Post("/video", video.PostHandler)
+
+	m.Get("/video", video.GetHandler)
 
 	m.Use(martini.Static("public"))
 	m.Use(cors.Allow(&cors.Options{

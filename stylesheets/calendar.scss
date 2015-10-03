@@ -1,25 +1,25 @@
-.calendar {
-  float: left;
-  margin-right: 1rem;
-}
-
 .calendar__day {
-  width: .5rem;
-  height: .5rem;
+  width: .75rem;
+  height: .75rem;
   float: left;
-  margin: .5rem;
+  margin: .64rem;
 }
 
 .calendar__dateline {
-  font-size: 2rem;
+  font-size: 3rem;
   margin: .5rem 0;
 }
 
+.calendar__legend {
+  display: flex;
+  justify-content: space-between;
+}
+
 .calendar__legend__label {
-  float: left;
-  margin: .5rem 0.425rem;
-  margin-bottom: .25rem;
-  font-size: 1rem;
+  margin: .25rem 0;
+  font-size: 1.5rem;
+  width: 2rem;
+  text-align: center;
 }
 
 .calendar__day.active-month {

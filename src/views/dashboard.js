@@ -9,17 +9,19 @@ import Calendar from '../containers/calendar-container';
 import Weather from '../containers/weather-container';
 import Transit from '../containers/transit-container';
 
+require('../../stylesheets/status-bar');
+
 export default class Dashboard extends React.Component {
   render() {
     return (
       <div className='container' >
         <Video />
         <Transit />
-        <div className='time-container'>
-          <Clock />
+        <div className='status-bar' >
+          <Weather />
           <Calendar />
+          <Clock />
         </div>
-        <Weather />
       </div>
     );
   }

@@ -8,13 +8,14 @@
   margin-right: .5em;
 }
 
-$muni: KT N J L M;
+$muni: KT N J L M K;
 $muni-colors: (
   KT: #F60043,
-  N: #00549C,
+  N: #0079C7,
   J: #FF9F25,
   L: #A9048E,
-  M: #008B50
+  M: #008B50,
+  K: #539CBE
 );
 
 @each $line in $muni {
@@ -29,7 +30,7 @@ $muni-colors: (
 
   .route[data-code='#{$line}'] .route__departures__time:first-child {
     font-weight: bold;
-    color: lighten(map-get($muni-colors, $line), 20%);
+    color: saturate(lighten(map-get($muni-colors, $line), 20%), 100%);
   }
 }
 
@@ -50,12 +51,9 @@ $bart-colors: (
 
 .bart-route-icon {
   content: '';
-  display: inline-block;
+  display: inline-flex;
   width: .6em;
   height: .6em;
-  margin-top: .35rem;
-  vertical-align: middle;
-  background-size: contain;
   margin-right: .5em;
 }
 

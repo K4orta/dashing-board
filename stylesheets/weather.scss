@@ -1,10 +1,4 @@
 .forecast {
-  position: absolute;
-  display: inline-block;
-  left: 0;
-  bottom: 0;
-  padding: 1rem;
-
   text-align: center;
 }
 
@@ -30,6 +24,6 @@
 }
 
 .day__icon {
-  font-size: 2em;
-  line-height: 2;
+  font-size: 1.8em;
+  line-height: 1.6;
 }
