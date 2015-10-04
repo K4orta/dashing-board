@@ -12,7 +12,6 @@ export default class Transit extends React.Component {
     let muni = this.props.transit.muni.map((direction, i) => {
       return <Direction {...direction} key={'muni-' + i} />
     });
-    console.log(this.props.transit.bart);
     let bart = this.props.transit.bart.map((direction, i) => {
       return <Direction {...direction} key={'bart-' + i} />
     });
