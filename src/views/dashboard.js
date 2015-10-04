@@ -16,6 +16,7 @@ export default class Dashboard extends React.Component {
     return (
       <div className='container' >
         <Video />
+        
         <Transit />
         <div className='status-bar' >
           <Weather />
