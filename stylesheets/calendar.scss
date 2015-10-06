@@ -28,6 +28,7 @@
 
 .calendar__day.current {
   background-color: white;
+  box-shadow: 1px 1px 1px rgba(#10194D, .5);
 }
 
 .calendar__day:nth-of-type(7n+1) {

@@ -37,6 +37,8 @@ export function fetchMuni() {
       .then(resp => resp.json())
       .then(json => {
         dispatch(receiveMuni(json));
+      }).catch((err) => {
+        
       });
   };
 };
@@ -48,6 +50,8 @@ export function fetchBart() {
       .then(resp => resp.json())
       .then(json => {
         dispatch(receiveBart(json));
+      }).catch((err) => {
+        
       });
   };
 };

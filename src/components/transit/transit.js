@@ -7,6 +7,13 @@ export default class Transit extends React.Component {
     let { fetchMuni, fetchBart } = this.props;
     fetchMuni();
     fetchBart();
+    this.timer = setInterval(() => {
+      fetchMuni();
+      fetchBart();
+    }, 1000 * 60);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
   render() {
     let muni = this.props.transit.muni.map((direction, i) => {
