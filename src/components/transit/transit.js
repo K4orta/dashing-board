@@ -1,5 +1,7 @@
 import React from 'react';
 import Direction from './direction';
+import { MINUTE } from '../../constants/time';
+
 require('../../../stylesheets/transit');
 
 export default class Transit extends React.Component {
@@ -10,7 +12,7 @@ export default class Transit extends React.Component {
     this.timer = setInterval(() => {
       fetchMuni();
       fetchBart();
-    }, 1000 * 60);
+    }, MINUTE);
   }
   componentWillUnmount() {
     clearInterval(this.timer);
