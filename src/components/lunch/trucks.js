@@ -1,18 +1,16 @@
 import React from 'react';
 import Truck from './truck';
+require('../../../stylesheets/lunch');
 
 export default class Trucks extends React.Component {
-  componentDidMount() {
-    let { fetchTrucks } = this.props;
-    fetchTrucks();
-  }
   render() {
-    let trucks = this.props.lunch.trucks.map((day) => {
-      return <Truck />;
+    let trucks = this.props.vendors.map((truck) => {
+      return <Truck name={truck} key={truck} />;
     });
     console.log(this.props);
     return (
       <div className='lunch'>
+        {trucks}
       </div>
     );
   }

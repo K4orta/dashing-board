@@ -10,8 +10,8 @@ import Clock from '../components/clock';
 import Calendar from '../containers/calendar-container';
 import Weather from '../containers/weather-container';
 import Transit from '../containers/transit-container';
+import Lunch from '../containers/lunch-container';
 import TimedContent from '../components/timed-content';
-import Lunch from '../components/foodtrucks/trucks'
 
 require('../../stylesheets/status-bar');
 const SECOND = 1000
@@ -34,7 +34,7 @@ class Dashboard extends React.Component {
         <TimedContent startTime={15} endTime={18} {...this.props.time}>
           <Transit />
         </TimedContent>
-        <TimedContent startTime={15} endTime={19} {...this.props.time}>
+        <TimedContent startTime={12} endTime={23} {...this.props.time}>
           <Lunch />
         </TimedContent>
         <div className='status-bar' >
