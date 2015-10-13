@@ -36,38 +36,18 @@ $temp-80: #FFFA80;
 $temp-90: #FFAF41;
 $temp-100: #FF5200;
 
-@for $i from 40 to 50 {
-  .temp--#{$i} {
-    color: mix($temp-40,$temp-50, 100 - (($i - 40) * 10));
+@mixin tempGrad($startTemp, $endTemp, $startColor, $endColor) {
+  $maxRange: $endTemp - $startTemp;
+  @for $i from $startTemp to $endTemp {
+    $delta: (($i - $startTemp) / $maxRange) * 100;
+    .temp--#{$i} {
+      color: mix($startColor, $endColor, 100 - $delta);
+    }
   }
 }
 
-@for $i from 50 to 60 {
-  .temp--#{$i} {
-    color: mix($temp-50,$temp-60, 100 - (($i - 50) * 10));
-  }
-}
-
-@for $i from 60 to 70 {
-  .temp--#{$i} {
-    color: mix($temp-60,$temp-70, 100 - (($i - 60) * 10));
-  }
-}
-
-@for $i from 70 to 80 {
-  .temp--#{$i} {
-    color: mix($temp-70,$temp-80, 100 - (($i - 70) * 10));
-  }
-}
-
-@for $i from 80 to 90 {
-  .temp--#{$i} {
-    color: mix($temp-80,$temp-90, 100 - (($i - 80) * 10));
-  }
-}
-
-@for $i from 90 to 100 {
-  .temp--#{$i} {
-    color: mix($temp-90,$temp-100, 100 - (($i - 90) * 10));
-  }
-}
+@include tempGrad(60, 65, $temp-50, $temp-60);
+@include tempGrad(65, 70, $temp-60, $temp-70);
+@include tempGrad(70, 75, $temp-70, $temp-80);
+@include tempGrad(75, 80, $temp-80, $temp-90);
+@include tempGrad(80, 100, $temp-90, $temp-100);
