@@ -1,6 +1,6 @@
 import React from 'react';
 import Forecast from './forecast';
-import { MINUTE } from '../../constants/time';
+import { HOUR } from '../../constants/time';
 require('../../../stylesheets/weather');
 
 export default class Weather extends React.Component {
@@ -9,7 +9,7 @@ export default class Weather extends React.Component {
     fetchWeather();
     this.timer = setInterval(() => {
       fetchWeather();
-    }, MINUTE * 5);
+    }, HOUR / 2);
   }
   componentWillUnmount() {
     clearInterval(this.timer);

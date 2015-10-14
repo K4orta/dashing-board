@@ -31,16 +31,16 @@ class Dashboard extends React.Component {
     return (
       <div className='container' >
         <Video />
-        <TimedContent startTime={15} endTime={18} {...this.props.time}>
+        <TimedContent startTime={11} endTime={18} {...this.props.time}>
           <Transit />
         </TimedContent>
         <TimedContent startTime={7} endTime={23} {...this.props.time}>
           <Lunch />
         </TimedContent>
         <div className='status-bar' >
-          <Weather />
-          <Calendar />
           <Clock />
+          <Calendar />
+          <Weather />
         </div>
       </div>
     );
