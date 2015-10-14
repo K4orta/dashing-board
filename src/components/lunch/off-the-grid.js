@@ -8,7 +8,7 @@ export default class OffTheGrid extends React.Component {
   }
   render() {
     let currentDay = this.props.trucks.find((day) => {
-      return (new Date()).getDate() != day.day;
+      return (new Date()).getDate() == day.day;
     });
     if (currentDay) {
       return (

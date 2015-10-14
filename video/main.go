@@ -1,6 +1,7 @@
 package video
 
 import (
+	"encoding/json"
 	"io/ioutil"
 	"log"
 	"net"
@@ -15,41 +16,46 @@ import (
 var currentVideo string
 
 func GetHandler(res http.ResponseWriter, req *http.Request) {
-	res.Write([]byte("ok"))
+	out, _ := json.Marshal(map[string]string{
+		"id": currentVideo,
+	})
+
+	res.Write(out)
 }
 
 func PostHandler(res http.ResponseWriter, req *http.Request) {
+	defer req.Body.Close()
+	err := CheckForVideo()
+	if err != nil {
+		res.Write([]byte("bad"))
+	}
 	res.Write([]byte("ok"))
 }
 
-func CheckForVideo() {
+func CheckForVideo() error {
 	conn, err := net.Dial("tcp", "imap.gmail.com:993")
 	if err != nil {
 		log.Panic(err)
 	}
 	client, err := imap.NewClient(conn, "imap.gmail.com")
 	if err != nil {
-		log.Panic(err)
+		return err
 	}
 	defer client.Close()
 
 	err = client.Login(os.Getenv("DASHBOARD_EMAIL"), os.Getenv("DASHBOARD_EMAIL_PASSWORD"))
 	if err != nil {
-		log.Panic(err)
+		return err
 	}
 	client.Select(imap.Inbox)
 	ids, _ := client.Search("unseen")
+	defer client.Logout()
 
 	for _, id := range ids {
 		client.StoreFlag(id, imap.Seen)
 
 		msg, _ := client.GetMessage(id)
 
-		// fmt.Println("From:", get1st(msg.Header.AddressList("From")))
-		// from, _ := msg.Header.AddressList("To")
-		// fmt.Println("From:", from[0].Name)
-		// fmt.Println("Subject:", msg.Header["Subject"])
-		// fmt.Println("Date:", get1st(msg.Header.Date()))
 		body, _ := ioutil.ReadAll(msg.Body)
 		r, _ := regexp.Compile("http://www\\.youtube\\.com/watch\\?v=(.*)&")
 		match := r.FindString(string(body))
@@ -57,7 +63,7 @@ func CheckForVideo() {
 		match = strings.Replace(match, "&", "", 1)
 		currentVideo = match
 	}
-	client.Logout()
+	return nil
 }
 
 func get1st(a, b interface{}) interface{} {
