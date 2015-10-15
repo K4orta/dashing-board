@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as TimeActions from '../actions/time-actions';
+import { MINUTE } from '../constants/time';
 
 import Video from '../components/video-bg';
 import Clock from '../components/clock';
@@ -14,14 +15,12 @@ import Lunch from '../containers/lunch-container';
 import TimedContent from '../components/timed-content';
 
 require('../../stylesheets/status-bar');
-const SECOND = 1000
-const MINUTE = SECOND * 60;
 
 class Dashboard extends React.Component {
   componentDidMount() {
     let {minuteTick} = this.props;
     this.timer = setInterval(() => {
-      minuteTick();
+      minuteTick(new Date());
     }, MINUTE);
   }
   componentWillUnmount() {
@@ -31,7 +30,7 @@ class Dashboard extends React.Component {
     return (
       <div className='container' >
         <Video />
-        <TimedContent startTime={11} endTime={18} {...this.props.time}>
+        <TimedContent startTime={15} endTime={18} {...this.props.time}>
           <Transit />
         </TimedContent>
         <TimedContent startTime={7} endTime={23} {...this.props.time}>
