@@ -9,15 +9,18 @@ import (
 	"os"
 	"regexp"
 	"strings"
+	"time"
 
 	imap "github.com/mikkeloscar/goimap"
 )
 
 var currentVideo string
+var lastSubmission time.Time
 
 func GetHandler(res http.ResponseWriter, req *http.Request) {
 	out, _ := json.Marshal(map[string]string{
-		"videoId": currentVideo,
+		"videoId":        currentVideo,
+		"lastSubmission": lastSubmission.Format(time.RFC3339),
 	})
 
 	res.Write(out)
@@ -62,6 +65,7 @@ func CheckForVideo() error {
 		match = strings.Replace(match, "http://www.youtube.com/watch?v=3D", "", 1)
 		match = strings.Replace(match, "&", "", 1)
 		currentVideo = match
+		lastSubmission = time.Now()
 	}
 	return nil
 }
