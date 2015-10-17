@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import * as TimeActions from '../actions/time-actions';
 import { MINUTE } from '../constants/time';
 
-import Video from '../components/video-bg';
+import Video from '../containers/video-container';
 import Clock from '../components/clock';
 import Calendar from '../containers/calendar-container';
 import Weather from '../containers/weather-container';
