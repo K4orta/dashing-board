@@ -4,7 +4,7 @@ export const CHANGE_VIDEO = 'CHANGE_VIDEO';
 export function changeVideo(id) {
   return {
     type: CHANGE_VIDEO,
-    id: id
+    videoId: id
   }
 };
 
@@ -19,7 +19,7 @@ export const RECEIVE_VIDEO = 'RECEIVE_VIDEO';
 export function receiveVideo(json) {
   return {
     type: RECEIVE_VIDEO,
-    video: json
+    videoId: json.videoId
   };
 };
 

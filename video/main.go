@@ -17,7 +17,7 @@ var currentVideo string
 
 func GetHandler(res http.ResponseWriter, req *http.Request) {
 	out, _ := json.Marshal(map[string]string{
-		"id": currentVideo,
+		"videoId": currentVideo,
 	})
 
 	res.Write(out)

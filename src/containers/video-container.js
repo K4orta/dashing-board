@@ -5,9 +5,7 @@ import Video from '../components/video-bg';
 import * as VideoActions from '../actions/video-actions';
 
 let mapStateToProps = (state) => {
-  return {
-    video: state.video
-  };
+  return state.video;
 };
 
 let mapDispatchToProps = (dispatch) => {
