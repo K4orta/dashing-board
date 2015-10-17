@@ -19,7 +19,7 @@ function receiveWeather(json) {
 export function fetchWeather() {
   return dispatch => {
     dispatch(requrestWeather());
-    return fetch(`http://localhost:3000/weather`)
+    return fetch(`/weather`)
       .then(resp => resp.json())
       .then(json => {
         dispatch(receiveWeather(json));

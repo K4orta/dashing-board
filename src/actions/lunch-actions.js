@@ -19,7 +19,7 @@ function receiveTrucks(json) {
 export function fetchTrucks() {
   return dispatch => {
     dispatch(requestTrucks());
-    return fetch(`http://localhost:3000/lunch/5`) // 5 is the code for the Civic Center Off the Grid
+    return fetch(`/lunch/5`) // 5 is the code for the Civic Center Off the Grid
       .then(resp => resp.json())
       .then(json => {
         dispatch(receiveTrucks(json));

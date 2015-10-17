@@ -33,12 +33,12 @@ function receiveBart(json) {
 export function fetchMuni() {
   return dispatch => {
     dispatch(requestMuni());
-    return fetch(`http://localhost:3000/transit/muni`)
+    return fetch(`/transit/muni`)
       .then(resp => resp.json())
       .then(json => {
         dispatch(receiveMuni(json));
       }).catch((err) => {
-        
+
       });
   };
 };
@@ -46,12 +46,12 @@ export function fetchMuni() {
 export function fetchBart() {
   return dispatch => {
     dispatch(requestBart());
-    return fetch(`http://localhost:3000/transit/bart`)
+    return fetch(`/transit/bart`)
       .then(resp => resp.json())
       .then(json => {
         dispatch(receiveBart(json));
       }).catch((err) => {
-        
+
       });
   };
 };

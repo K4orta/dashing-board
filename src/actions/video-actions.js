@@ -26,7 +26,7 @@ export function receiveVideo(json) {
 export function fetchVideo() {
     return dispatch => {
       dispatch(requestVideo());
-      return fetch('http://localhost:3000/video')
+      return fetch('/video')
         .then(resp => resp.json())
         .then(json => {
           dispatch(receiveVideo(json))
