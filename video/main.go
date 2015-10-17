@@ -18,6 +18,11 @@ var currentVideo string
 var lastSubmission time.Time
 
 func GetHandler(res http.ResponseWriter, req *http.Request) {
+	now := time.Now()
+	if now.Sub(lastSubmission) > time.Hour {
+		currentVideo = ""
+	}
+
 	out, _ := json.Marshal(map[string]string{
 		"videoId":        currentVideo,
 		"lastSubmission": lastSubmission.Format(time.RFC3339),
