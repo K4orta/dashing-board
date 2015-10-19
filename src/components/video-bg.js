@@ -1,5 +1,5 @@
 import React from 'react';
-import { HOUR } from '../constants/time';
+import { MINUTE } from '../constants/time';
 
 require('../../stylesheets/video');
 

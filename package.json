@@ -2,8 +2,8 @@
   "name": "dashing-board",
   "version": "2.0.0",
   "scripts": {
-    "build": "webpack -p --config webpack.prod.config.js src/main.js",
-    "run": "MARTINI_ENV=production NODE_ENV=production nohup ./dashing-board &"
+    "build": "NODE_ENV=production webpack src/main.js -p --config webpack.prod.config.js ",
+    "run": "MARTINI_ENV=production nohup ./dashing-board &"
   },
   "devDependencies": {
     "babel": "5.8.23",
