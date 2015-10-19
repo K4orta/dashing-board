@@ -1,4 +1,5 @@
 import React from 'react';
+import { HOUR } from '../constants/time';
 
 require('../../stylesheets/video');
 
@@ -6,6 +7,12 @@ export default class Video extends React.Component {
   componentDidMount() {
     let { fetchVideo } = this.props;
     fetchVideo();
+    this.timer = setInterval(() => {
+      fetchVideo();
+    }, HOUR);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
   render() {
     let videoId = this.props.videoId;

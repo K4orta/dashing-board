@@ -19,7 +19,7 @@ var lastSubmission time.Time
 
 func GetHandler(res http.ResponseWriter, req *http.Request) {
 	now := time.Now()
-	if now.Sub(lastSubmission) > time.Hour {
+	if currentVideo != "" && now.Sub(lastSubmission) > time.Hour*8 {
 		currentVideo = ""
 	}
 
