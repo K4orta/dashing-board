@@ -9,7 +9,7 @@ export default class Video extends React.Component {
     fetchVideo();
     this.timer = setInterval(() => {
       fetchVideo();
-    }, HOUR);
+    }, MINUTE);
   }
   componentWillUnmount() {
     clearInterval(this.timer);

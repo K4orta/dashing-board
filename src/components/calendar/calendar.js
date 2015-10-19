@@ -10,11 +10,11 @@ export default class Calendar extends React.Component {
     let {changeDay} = this.props;
     changeDay(new Date());
     this.timer = setInterval(() => {
-
-    }, MINUTE)
+      changeDay(new Date());
+    }, MINUTE * 5);
   }
   componentWillUnmount() {
-    clearInterval(this.timer); 
+    clearInterval(this.timer);
   }
   render() {
     let fillerDays = [];
