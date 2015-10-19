@@ -11,6 +11,8 @@ module.exports = {
 		contentBase: 'public'
 	},
 	entry: [
+		'webpack/hot/dev-server',
+		'webpack-dev-server/client?http://localhost:8080',
 		'./src/main'
 	],
 	output: {
