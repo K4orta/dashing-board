@@ -1,12 +1,20 @@
 import React from 'react';
 import Day from './day';
 import moment from 'moment';
+
+import { MINUTE } from '../../constants/time';
 require('../../../stylesheets/calendar');
 
 export default class Calendar extends React.Component {
   componentDidMount() {
     let {changeDay} = this.props;
     changeDay(new Date());
+    this.timer = setInterval(() => {
+
+    }, MINUTE)
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer); 
   }
   render() {
     let fillerDays = [];

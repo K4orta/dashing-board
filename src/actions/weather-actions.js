@@ -23,6 +23,8 @@ export function fetchWeather() {
       .then(resp => resp.json())
       .then(json => {
         dispatch(receiveWeather(json));
+      }).catch((err) => {
+
       });
   };
 };
