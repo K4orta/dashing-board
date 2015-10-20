@@ -7,8 +7,12 @@ export default (state = {
 }, action) => {
   switch (action.type) {
     case CHANGE_VIDEO:
+      if (state.videoFromAPI) {
+        return state;
+      }
       return {
-        videoId: action.videoId
+        videoId: randomVideo(),
+        videoFromAPI: false
       };
     case RECEIVE_VIDEO:
       let videoId = action.videoId;

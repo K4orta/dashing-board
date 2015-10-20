@@ -1,10 +1,9 @@
 import fetch from 'isomorphic-fetch';
 
 export const CHANGE_VIDEO = 'CHANGE_VIDEO';
-export function changeVideo(id) {
+export function changeVideo() {
   return {
-    type: CHANGE_VIDEO,
-    videoId: id
+    type: CHANGE_VIDEO
   }
 };
 
@@ -24,14 +23,14 @@ export function receiveVideo(json) {
 };
 
 export function fetchVideo() {
-    return dispatch => {
-      dispatch(requestVideo());
-      return fetch('/video')
-        .then(resp => resp.json())
-        .then(json => {
-          dispatch(receiveVideo(json))
-        }).catch(err => {
+  return dispatch => {
+    dispatch(requestVideo());
+    return fetch('/video')
+      .then(resp => resp.json())
+      .then(json => {
+        dispatch(receiveVideo(json))
+      }).catch(err => {
 
-        });
-    }
+      });
+  }
 };
