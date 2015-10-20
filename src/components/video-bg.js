@@ -1,5 +1,5 @@
 import React from 'react';
-import { MINUTE } from '../constants/time';
+import { MINUTE, HOUR } from '../constants/time';
 
 require('../../stylesheets/video');
 
@@ -9,7 +9,7 @@ export default class Video extends React.Component {
     fetchVideo();
     this.timer = setInterval(() => {
       fetchVideo();
-    }, MINUTE);
+    }, HOUR);
   }
   componentWillUnmount() {
     clearInterval(this.timer);
