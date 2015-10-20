@@ -2,7 +2,7 @@ import { CHANGE_VIDEO, RECEIVE_VIDEO } from '../actions/video-actions';
 import randomVideo from '../utils/random-live-video';
 
 export default (state = {
-  videoId: '',
+  videoId: randomVideo(),
   videoFromAPI: false
 }, action) => {
   switch (action.type) {
@@ -18,7 +18,7 @@ export default (state = {
       let videoId = action.videoId;
       if (videoId === '') {
         return {
-          videoId: randomVideo(),
+          videoId: state.videoId,
           videoFromAPI: false
         };
       }
