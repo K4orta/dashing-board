@@ -50,6 +50,7 @@ $temp-100: #FF5200;
   }
 }
 
+@include tempGrad(50, 60, $temp-40, $temp-50);
 @include tempGrad(60, 65, $temp-50, $temp-60);
 @include tempGrad(65, 70, $temp-60, $temp-70);
 @include tempGrad(70, 75, $temp-70, $temp-80);
