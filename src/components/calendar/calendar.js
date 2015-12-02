@@ -1,8 +1,7 @@
 import React from 'react';
 import Day from './day';
-import moment from 'moment';
 
-import { MINUTE } from '../../constants/time';
+import {MINUTE} from '../../constants/time';
 require('../../../stylesheets/calendar');
 
 export default class Calendar extends React.Component {
@@ -25,21 +24,18 @@ export default class Calendar extends React.Component {
       }
     }
 
-    let renderedDays = this.props.calendar.days.map((day) => {
-      return <Day day={day} key={day.date + fillerDays.length} isActive={day.date===this.props.calendar.day} />
-    });
-    let t = moment(this.props.calendar.time);
+    let renderedDays = this.props.calendar.days.map(day => <Day day={day} key={day.date + fillerDays.length} isActive={day.date === this.props.calendar.day} />);
 
     return (
-      <div className='calendar'>
-        <ul className='calendar__legend clearfix'>
-          <li className='calendar__legend__label'>S</li>
-          <li className='calendar__legend__label'>M</li>
-          <li className='calendar__legend__label'>T</li>
-          <li className='calendar__legend__label'>W</li>
-          <li className='calendar__legend__label'>T</li>
-          <li className='calendar__legend__label'>F</li>
-          <li className='calendar__legend__label'>S</li>
+      <div className="calendar">
+        <ul className="calendar__legend clearfix">
+          <li className="calendar__legend__label">S</li>
+          <li className="calendar__legend__label">M</li>
+          <li className="calendar__legend__label">T</li>
+          <li className="calendar__legend__label">W</li>
+          <li className="calendar__legend__label">T</li>
+          <li className="calendar__legend__label">F</li>
+          <li className="calendar__legend__label">S</li>
         </ul>
         <div>
           {fillerDays}

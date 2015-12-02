@@ -30,17 +30,17 @@ module.exports = {
 	module: {
 		loaders: [
 			{
-        test: /\.json$/,
-        loader: 'json'
-      },
+				test: /\.json$/,
+				loader: 'json'
+			},
 			{
 				test: /\.jsx?$/,
 				loaders: ['react-hot', 'babel?stage=0&optional[]=runtime&cacheDirectory'],
 				exclude: /node_modules/
 			},
 			{
-        test: /\.scss$/,
-        loader: 'style!css!sass'
+				test: /\.scss$/,
+				loader: 'style!css!sass'
 			},
 			{
 				test: /\.css/, loader: "style!css"
