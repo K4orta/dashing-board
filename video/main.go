@@ -72,10 +72,10 @@ func CheckForVideo() error {
 }
 
 func parseVideoString(input string) string {
-	r, _ := regexp.Compile("http://www\\.youtube\\.com/attribution_link\\?a=(.*)&")
+	r, _ := regexp.Compile("&u=/watch%3Fv%3D(.*)")
 	match := r.FindString(input)
-	match = strings.Replace(match, "http://www.youtube.com/attribution_link?a=", "", 1)
-	match = strings.Replace(match, "&", "", 1)
+	match = strings.Replace(match, "&u=/watch%3Fv%3D", "", 1)
+	match = strings.Replace(match, "%26feature%3Dem-share_video_user", "", 1)
 
 	return match
 }
