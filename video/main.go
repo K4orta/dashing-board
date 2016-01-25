@@ -65,14 +65,19 @@ func CheckForVideo() error {
 		msg, _ := client.GetMessage(id)
 
 		body, _ := ioutil.ReadAll(msg.Body)
-		r, _ := regexp.Compile("http://www\\.youtube\\.com/watch\\?v=(.*)&")
-		match := r.FindString(string(body))
-		match = strings.Replace(match, "http://www.youtube.com/watch?v=3D", "", 1)
-		match = strings.Replace(match, "&", "", 1)
-		currentVideo = match
+		currentVideo = parseVideoString(string(body))
 		lastSubmission = time.Now()
 	}
 	return nil
+}
+
+func parseVideoString(input string) string {
+	r, _ := regexp.Compile("http://www\\.youtube\\.com/attribution_link\\?a=(.*)&")
+	match := r.FindString(input)
+	match = strings.Replace(match, "http://www.youtube.com/attribution_link?a=", "", 1)
+	match = strings.Replace(match, "&", "", 1)
+
+	return match
 }
 
 func get1st(a, b interface{}) interface{} {
