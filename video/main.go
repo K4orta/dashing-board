@@ -40,6 +40,24 @@ func PostHandler(res http.ResponseWriter, req *http.Request) {
 	res.Write([]byte("ok"))
 }
 
+func ForcePostHandler(res http.ResponseWriter, req *http.Request) {
+	defer req.Body.Close()
+	var data map[string]string
+	d, err := ioutil.ReadAll(req.Body)
+	if err != nil {
+		res.Write([]byte("bad"))
+		return
+	}
+	err = json.Unmarshal(d, &data)
+	if val, ok := data["video"]; ok == true && err == nil {
+		lastSubmission = time.Now()
+		currentVideo = val
+		res.Write([]byte("ok"))
+	} else {
+		res.Write([]byte("Error with video field"))
+	}
+}
+
 func CheckForVideo() error {
 	conn, err := net.Dial("tcp", "imap.gmail.com:993")
 	if err != nil {

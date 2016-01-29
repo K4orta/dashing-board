@@ -69,6 +69,7 @@ func main() {
 	})
 
 	m.Post("/video", video.PostHandler)
+	m.Post("/video/update", video.ForcePostHandler)
 
 	m.Get("/video", video.GetHandler)
 
